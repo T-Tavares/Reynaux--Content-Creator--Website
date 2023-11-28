@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cesar Reynaux</title>
+
+        <!-- BOOTSTRAP ICONS CDN -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+        <!-- GOOGLE FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet" />
+
+        <!-- --------- -->
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" type="module" defer></script>
+    </head>
+    <body>
+        <!-- <header>
+            <img class="header-logo" src="assets/logo.webp" alt="" />
+            <i class="bi bi-cart header-cart-icon"> </i>
+            <section id="shopping-cart" class="closed">
+                <div class="shopping-cart-close-btn">
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                </div>
+                <div class="shopping-cart-header">
+                    <h1>Shopping Cart</h1>
+                </div>
+                <div class="shopping-cart-content">
+                    <div class="shopping-cart-card">
+                        <h3 class="shopping-cart-card-title"><span>X2</span>Title</h3>
+                        <h3 class="shopping-cart-card-price">$30</h3>
+                        <button class="shopping-cart-card-cancel-btn">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                    </div>
+                </div>
+                <input class="shopping-cart-promo-code" type="text" placeholder="Insert Your Promo CODE here" />
+                <div class="shopping-cart-total">
+                    <h3>TOTAL</h3>
+                    <h3 class="shopping-cart-total-price">$30</h3>
+                </div>
+                <button class="shopping-cart-checkout">Checkout</button>
+            </section>
+        </header> -->
+        <img class="logo" src="assets/logo.webp" alt="" />
+
+        <section id="shopping-cart">
+            <i class="bi bi-cart shopping-cart-icon"> </i>
+
+            <div class="shopping-cart-wrapper closed">
+                <div class="shopping-cart-close-btn">
+                    <i class="bi bi-arrow-right-circle-fill"></i>
+                </div>
+                <div class="shopping-cart-header">
+                    <h1>Shopping Cart</h1>
+                </div>
+                <div class="shopping-cart-content">
+                    <!-- <div class="shopping-cart-card">
+                        <h3 class="shopping-cart-card-title"><span>X2</span>Title</h3>
+                        <h3 class="shopping-cart-card-price">$30</h3>
+                        <button class="shopping-cart-card-cancel-btn">
+                            <i class="bi bi-x-circle-fill"></i>
+                        </button>
+                    </div> -->
+                </div>
+                <input class="shopping-cart-promo-code" type="text" placeholder="Insert Your Promo CODE here" />
+                <div class="shopping-cart-total">
+                    <h3>TOTAL</h3>
+                    <h3 class="shopping-cart-total-price">$30</h3>
+                </div>
+                <button class="shopping-cart-checkout">Checkout</button>
+            </div>
+        </section>
+        <!-- <nav class="nav-menu-corner"> -->
+        <div id="video-lightbox" class="hidden">
+            <iframe
+                src="https://www.youtube.com/embed/2oJuaVO9U1A?enablejsapi=1"
+                frameborder="0"
+                allowfullscreen
+            ></iframe>
+        </div>
+        <nav class="nav-menu">
+            <ul>
+                <li data-ref="home"><a href="#home">home</a></li>
+                <li data-ref="work"><a href="#work">work</a></li>
+                <li data-ref="store"><a href="#store">store</a></li>
+                <li data-ref="about"><a href="#about">about</a></li>
+                <li data-ref="contact"><a href="#contact">contact</a></li>
+            </ul>
+        </nav>
+        <div class="nav-socials">
+            <ul>
+                <li>
+                    <button><i class="bi bi-instagram"></i></button>
+                </li>
+                <li>
+                    <button><i class="bi bi-facebook"></i></button>
+                </li>
+                <li>
+                    <button><i class="bi bi-whatsapp"></i></button>
+                </li>
+            </ul>
+        </div>
+        <section id="home">
+            <h1>reynaux.</h1>
+            <video autoplay muted loop id="home-video">
+                <source
+                    src="https://video.wixstatic.com/video/511038_99b8457040474073a5a4ca0815ccea20/1080p/mp4/file.mp4"
+                    type="video/mp4"
+                />
+            </video>
+        </section>
+        <section id="work">
+            <h1 class="title">Work</h1>
+            <div class="work-gallery"></div>
+        </section>
+        <section id="store">
+            <h1 class="title">Store</h1>
+            <div class="store-gallery"></div>
+        </section>
+        <section id="about">
+            <h1 class="title">About</h1>
+            <div class="about-wrapper">
+                <img src="./assets/about-profile.webp" alt="" class="about-img" />
+
+                <div class="about-content">
+                    <h1 class="about-title">césar <span>reynaux</span></h1>
+                    <h3 class="about-subtitle">creative director</h3>
+                    <p class="about-paragraph">
+                        Hello, My name is César Reynaux, I am a creative director focusing on audiovisual work based in
+                        São Paulo. I have 5 years of experience as a designer, and currently, I have been working in the
+                        audiovisual field for 6 years. I have had the opportunity to collaborate on projects for brands
+                        such as WhatsApp, Rainha, NBA, Reserva, HypeBeast, and Insider, as well as with artists like Far
+                        From Alaska, Day Limns, and Gustavo Bertoni. My journey as a designer has provided me with a
+                        solid understanding of aesthetics, essential to achieve the desired final results in each
+                        project. In addition to working on project development, I also engage in activities such as
+                        capturing, editing, and colorization. My goal is to solve brand problems by creating films that
+                        positively impact the audience's lives, whether through a lifestyle change or by promoting
+                        products targeted to a specific audience. I firmly believe that good ideas generate excellent
+                        results.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h1 class="title">Contact</h1>
+            <h3>Flick me a message or reach out on my socials.</h3>
+            <div class="contact-wrapper">
+                <form class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="text" name="subject" placeholder="Your Message Subject" required />
+                    <input type="text" name="email" placeholder="Your Email" required />
+                    <textarea name="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                    <button>Send</button>
+                </form>
+                <div class="contact-phone-and-socials">
+                    <button><i class="bi bi-instagram"></i></button>
+                    <button><i class="bi bi-facebook"></i></button>
+                    <button><i class="bi bi-whatsapp"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <footer></footer>
+    </body>
+</html>

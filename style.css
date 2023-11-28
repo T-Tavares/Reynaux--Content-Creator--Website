@@ -1,0 +1,1030 @@
+/* -------------------------- CSS RESET --------------------------- */
+:root {
+    --text-colour: #ddd;
+    --text-colour-lowlight: #999;
+    --text-colour-highlight: #fff;
+
+    --transition-fast-setup: 200ms ease-in-out;
+    --transition-long-setup: 400ms ease-in-out;
+
+    --nav-animation-time: 250ms; /* Also helpful in case I want to change it on JS*/
+}
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    color: var(--text-colour);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    margin: 0;
+    padding: 0;
+}
+button {
+    all: unset;
+}
+
+/* ------------------------- INIT SET UP -------------------------- */
+
+body {
+    background-color: #000;
+    font-family: HelveticaNeue, Helvetica Neue, helvetica, Sans-Serif;
+}
+
+#work,
+#store,
+#about,
+#contact {
+    padding: 5vh min(15vw, 150px);
+    min-height: 90vh; /* To compensate the padding */
+}
+#home {
+    height: 100vh;
+    width: calc(100vw - 1rem);
+    /* width: 100vw; */
+}
+#work h1,
+#store h1,
+#about h1,
+#contact h1,
+#home h1 {
+    font-family: 'Oswald', sans-serif;
+}
+
+.title {
+    font-size: 10vh;
+    width: 80vw;
+    margin: 0 0 5rem 0;
+
+    text-align: center;
+}
+/* ---------------------------- LOGO ----------------------------- */
+
+.logo {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    mix-blend-mode: difference; /* revert colors according to bg */
+    z-index: 2;
+}
+/* ---------------------------------------------------------------- */
+/* ------------------------ SHOPPING CART ------------------------- */
+/* ---------------------------------------------------------------- */
+
+.shopping-cart-icon {
+    position: fixed;
+    right: 1.5rem;
+    top: 1.5rem;
+
+    font-size: 2rem;
+    border-radius: 50%;
+    line-height: 0;
+    padding: 10px;
+
+    cursor: pointer;
+
+    transition-property: color background-color top left;
+    transition: 200ms ease-in-out;
+
+    mix-blend-mode: difference; /* revert colors according to bg */
+
+    z-index: 200;
+}
+.shopping-cart-icon:hover {
+    background-color: #fff;
+    color: #000;
+    font-size: 2.2rem;
+
+    right: 1.4rem;
+    top: 1.4rem;
+}
+
+.shopping-cart-wrapper {
+    position: fixed;
+    display: grid;
+    grid-template-rows: 2.5rem 1fr repeat(3, 3rem) 1rem;
+    grid-template-areas:
+        'header'
+        'items'
+        'promo'
+        'total'
+        'gap'
+        'checkout';
+
+    gap: 0.5rem;
+    right: 0rem;
+    top: 0.5rem;
+    border-radius: 1rem 0 0 1rem;
+    height: 93vh;
+    width: max(25vw, 350px);
+    padding: 1.5rem 2rem;
+
+    background-color: #ddd;
+    color: #555;
+
+    transition: transform 300ms ease-in-out;
+    z-index: 200;
+}
+
+.shopping-cart-wrapper.closed {
+    transform: translateX(calc(35vw + 400px));
+}
+
+/* ------ SHOPPING CART HEADER ------ */
+
+.shopping-cart-close-btn {
+    color: #555;
+    position: absolute;
+    left: 1rem;
+    top: 1.5rem;
+
+    font-size: 2.5rem;
+    line-height: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition-property: color, background-color, top, left, font-size;
+    transition: 300ms ease-in-out;
+}
+.shopping-cart-close-btn:hover {
+    color: #fff;
+    background: radial-gradient(#000 60%, #fff 61%);
+
+    font-size: 3rem;
+    top: 1.3rem; /* growing icon compensation - center pivot */
+    left: 0.7rem; /* growing icon compensation - center pivot */
+}
+.shopping-cart-header {
+    margin-left: 3rem;
+    grid-area: header;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #555;
+}
+
+/* ---- SHOPPING CART ITEM CARD ----- */
+.shopping-cart-content {
+    grid-area: items;
+    margin-top: 3rem;
+}
+
+.shopping-cart-card {
+    display: flex;
+    flex-wrap: nowrap;
+
+    border-bottom: 2px solid #bbb;
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+.shopping-cart-card h3 {
+    font-weight: 100;
+    font-size: 1.5rem;
+}
+
+.shopping-cart-card-title {
+    text-transform: uppercase;
+    flex: 1 0 0;
+}
+.shopping-cart-card-title span {
+    text-transform: lowercase;
+    margin-right: 1rem;
+}
+.shopping-cart-card-price {
+    margin-right: 1.5rem;
+    flex: 0 1;
+}
+.shopping-cart-card-cancel-btn {
+    font-size: 2rem;
+    line-height: 0;
+    flex: 0 1;
+}
+/* ---- SHOPPING CART PROMO CODE ---- */
+
+.shopping-cart-promo-code {
+    grid-area: promo;
+    border: none;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    width: calc(100% - 2rem);
+    border-radius: 5px;
+    outline: none;
+}
+.shopping-cart-promo-code::placeholder {
+    color: #ccc;
+}
+
+/* ------ SHOPPING CART TOTAL ------- */
+
+.shopping-cart-total {
+    grid-area: total;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: 2px solid #eee;
+    background-color: #999;
+
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+.shopping-cart-total h3 {
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+/* ----- SHOPPING CART CHECKOUT ----- */
+
+.shopping-cart-checkout {
+    grid-area: checkout;
+    font-size: 2rem;
+    margin: -2rem;
+    font-weight: 100;
+    text-align: center;
+    text-transform: uppercase;
+
+    border-radius: 0 0 0 1rem;
+    background-color: #555;
+    color: #ddd;
+
+    transition-property: background-color color letter-spacing;
+    transition: 300ms ease-in-out;
+    cursor: pointer;
+}
+.shopping-cart-checkout:hover {
+    background-color: #333;
+    color: #fff;
+    letter-spacing: 5px;
+}
+.shopping-cart-checkout:active {
+    transition: 100ms ease-in-out;
+    letter-spacing: 3px;
+}
+
+/* ---------------------------------------------------------------- */
+/* ----------------------------- NAV ------------------------------ */
+/* ---------------------------------------------------------------- */
+
+.nav-menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    gap: 2rem;
+
+    position: fixed;
+
+    width: 100%;
+    margin: 0 auto;
+
+    color: var(--text-colour);
+    z-index: 100;
+    mix-blend-mode: difference; /* revert colors according to bg */
+}
+.nav-menu ul {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    padding: 0;
+
+    list-style: none;
+    text-transform: uppercase;
+}
+.nav-menu ul li {
+    cursor: pointer;
+    /* Two next lines will keep the buttons centered when active transition is on */
+    text-align: center;
+    min-width: 7rem;
+}
+.nav-menu ul li a {
+    text-decoration: none;
+    color: var(--text-colour);
+    transition: var(--transition-fast-setup);
+}
+.nav-menu ul li a:hover {
+    color: var(--text-colour-lowlight);
+}
+.nav-menu ul li a:active,
+.nav-menu ul li:active {
+    font-size: 0.9rem;
+    color: var(--text-colour-highlight);
+}
+.active-section {
+    text-decoration: line-through;
+}
+
+/* ------------------------- NAV AT CORNER ------------------------ */
+
+.nav-menu-corner {
+    bottom: 0;
+    left: 0;
+    width: fit-content;
+    padding: 2rem;
+}
+.nav-menu-corner ul {
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.nav-menu-corner ul li {
+    text-align: left;
+    min-height: 1.2rem;
+}
+
+.nav-menu-corner::after {
+    pointer-events: none; /* makes element ignore mouse events - allowing mouse hover and clicks*/
+
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 170px;
+    bottom: 2rem;
+    left: 1rem;
+
+    border: 1px solid #555;
+    border-top: none;
+    border-right: none;
+}
+/* --------------------- NAV SLIDE ANIMATIONS --------------------- */
+/* prettier-ignore */
+@keyframes slideOutTop {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-80px);}
+}
+/* prettier-ignore */
+@keyframes slideOutCorner {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-200px);}
+}
+/* prettier-ignore */
+@keyframes slideInTop {
+    0% {transform: translateY(-80px);}
+    100% {transform: translateY(0);}
+}
+/* prettier-ignore */
+@keyframes slideInCorner {
+    0% {transform: translateX(-200px);}
+    100% {transform: translateX(0);}
+}
+
+.nav-menu.slideOut {
+    animation: slideOutTop var(--nav-animation-time) ease-in forwards;
+}
+.nav-menu-corner.slideOut {
+    animation: slideOutCorner var(--nav-animation-time) ease-in forwards;
+}
+
+.nav-menu.slideIn {
+    animation: slideInTop var(--nav-animation-time) ease-in forwards;
+}
+.nav-menu-corner.slideIn {
+    animation: slideInCorner var(--nav-animation-time) ease-in forwards;
+}
+
+/* ---------------------------------------------------------------- */
+/* --------------------------- SOCIALS ---------------------------- */
+/* ---------------------------------------------------------------- */
+
+.nav-socials {
+    position: fixed;
+    padding: 2rem;
+    bottom: 0;
+    right: 0;
+
+    z-index: 50;
+    mix-blend-mode: difference; /* revert colors according to bg */
+}
+
+.nav-socials ul {
+    display: flex;
+    flex-direction: column;
+
+    list-style: none;
+}
+
+.nav-socials ul li {
+    color: var(--text-colour);
+    font-size: 1.2rem;
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    cursor: pointer;
+    transition: var(--transition-fast-setup);
+}
+
+.nav-socials ul li:hover {
+    color: var(--text-colour-lowlight);
+}
+.nav-socials ul li:active {
+    color: var(--text-colour-highlight);
+    font-size: 1.1rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* --------------------------- SECTIONS --------------------------- */
+/* ---------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------- */
+/* ------------------------ LIGHTBOX VIDEO ------------------------ */
+/* ---------------------------------------------------------------- */
+
+/* TODO - FIND A WAY TO MAKE A FADE TRANSITION - MOSTLY TO HIDE IFRAME GLITCH WHEN CHANGE VIDEO SRC  */
+#video-lightbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    background-color: #000000c0;
+    backdrop-filter: blur(10px);
+
+    opacity: 100%;
+    visibility: visible;
+
+    transition: visibility 0ms, 300ms ease-in-out;
+}
+#video-lightbox iframe {
+    width: 80vw;
+    aspect-ratio: 16/9;
+    border: 1px solid #151515;
+    border-radius: 15px;
+    box-shadow: 0 0 100px -70px #fff;
+}
+
+#video-lightbox.hidden {
+    opacity: 0%;
+    visibility: hidden;
+    transition: visibility 0ms, 300ms ease-in-out;
+}
+
+/* ---------------------------------------------------------------- */
+/* ----------------------------- HOME ----------------------------- */
+/* ---------------------------------------------------------------- */
+
+#home {
+    color: var(--text-colour);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+#home-video {
+    position: absolute;
+    object-fit: cover;
+
+    width: 99vw; /* Compensate video overflow*/
+    height: 100vh;
+    z-index: -1;
+}
+#home::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(transparent, #000);
+    z-index: 1;
+}
+
+#home h1 {
+    position: relative;
+    font-size: max(5rem, 8vw);
+}
+
+/* ---------------------------------------------------------------- */
+/* ----------------------------- WORK ----------------------------- */
+/* ---------------------------------------------------------------- */
+
+.work-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+.work-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    aspect-ratio: 16/9;
+
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.work-card::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    opacity: 0.3;
+
+    transition: opacity 200ms ease-in-out;
+}
+
+.work-card img {
+    height: 100%;
+    transition: height 400ms ease-out;
+}
+.work-card-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+
+    display: flex;
+    align-items: end;
+}
+.work-card-controls button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+
+    transition: font-size 400ms ease-in-out;
+}
+.work-card-controls div {
+    display: flex;
+    flex-direction: column;
+    padding: 0.8rem 1rem;
+    gap: 0.5rem;
+    background-color: rgb(0, 0, 0, 0);
+    width: 100%;
+
+    transform: translateY(1.6rem);
+
+    transition-property: background-color transform;
+    transition: 300ms ease-out;
+}
+.work-card-controls div h3 {
+}
+.work-card-controls div p {
+    font-size: 12px;
+    color: var(--text-colour-lowlight);
+}
+
+/* ----------------------- WORK TRANSITIONS ----------------------- */
+
+.work-card:hover.work-card::before {
+    opacity: 0;
+}
+.work-card:hover .work-card-controls button {
+    font-size: 3.5rem;
+}
+.work-card:hover.work-card img {
+    height: 105%;
+}
+.work-card:hover .work-card-controls div {
+    background-color: rgb(0, 0, 0, 0.5);
+    transform: translateY(0);
+}
+.work-card:hover .work-card-controls div p {
+}
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------- STORE ----------------------------- */
+/* ---------------------------------------------------------------- */
+
+.store-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+.store-card {
+    --store-card-width: 80vw;
+    --store-card-height-closed: 20vh;
+
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    width: var(--store-card-width);
+
+    /* This value can NOT be %, because later I am using % to track the slide bar place. */
+}
+
+/* -------------------- STORE CARD CLOSED SET --------------------- */
+
+/* 
+    Read this section after reading the rest of the store css will make
+    a bit more sense. 
+    Those were tweaks on CSS I made on trial and error so I don't need to 
+    rerender elements.
+*/
+
+/* Close Store Card Button */
+.close-store-card-btn {
+    position: absolute;
+    right: 0;
+    height: 50px;
+    width: 50px;
+    margin: 1rem;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0, 0.3);
+    z-index: 20;
+    font-size: 3rem;
+    line-height: 0;
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+.close-store-card-btn:hover {
+    background-color: rgb(0, 0, 0, 0.8);
+    color: #fff;
+}
+
+.store-card.closed {
+    height: var(--store-card-height-closed);
+}
+
+.image-after.closed {
+    overflow: visible; /* Displays full LUT image*/
+}
+
+.image-before.closed,
+.image-slider.closed,
+.image-slider-bar.closed,
+.image-slider-button.closed,
+.lut-display-info.closed,
+.close-store-card-btn.closed,
+.short-info {
+    display: none;
+}
+
+.short-info.closed {
+    display: flex;
+}
+
+/* ----------- SHORT INFO ----------- */
+
+/* 
+    On closed store cards there will be a short info with title and 
+    description that will dissapear once the card is opened. ( click )
+*/
+
+.short-info {
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(var(--store-card-height-closed) - 2rem);
+    padding: 1rem 1.5rem;
+    background-color: rgb(0, 0, 0, 0.5);
+    backdrop-filter: blur(30px);
+    cursor: pointer;
+    transition: background-color 300ms ease-in-out;
+    z-index: 1;
+}
+
+.short-info h1 {
+    color: #ddd;
+    font-size: 6vh;
+
+    transition-property: color, font-size;
+    transition: 300ms ease-in-out;
+}
+.short-info p {
+    color: #888;
+    width: 100%;
+
+    text-align: justify;
+    line-height: 1.2rem;
+
+    transition: 300ms ease-in-out;
+    transition-property: color font-size;
+}
+
+.short-info:hover {
+    background-color: rgb(0, 0, 0, 0.1);
+}
+.short-info:hover.short-info h1 {
+    color: #fff;
+    font-size: 6.1vh;
+}
+
+.short-info:hover.short-info p {
+    color: #fff;
+}
+
+/* 
+    For reference there's a list of all the classes I've combibed to
+    a .closed class. If you need to eddit or debbug anything
+    
+    .store-card => height change
+    .close-store-card-btn
+
+    .short-info => Works opposite as the others, when store card is closed this class is visible.
+
+    .image-before
+    .image-after => changes overflow to visible ( The whole image should be displayed )
+
+    .image-slider
+    .image-slider-bar
+    .image-slider-button
+
+    .lut-display-info
+
+*/
+
+/* ---------------- STORE - LUT COMPARISON FEATURE ---------------- */
+
+.lut-display-comparison-wrapper {
+    position: relative;
+    --slide-position: 50%;
+}
+
+.image-wrapper div img {
+    object-fit: cover;
+    object-position: 50% 50%;
+    width: var(--store-card-width);
+    height: 50vh;
+}
+
+.image-after {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: var(--slide-position);
+    overflow: hidden;
+}
+
+.image-slider {
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: grab;
+}
+.image-slider:active {
+    cursor: grabbing;
+}
+.image-slider-bar {
+    position: absolute;
+    top: 0;
+    left: var(--slide-position);
+    transform: translateX(-50%);
+    width: 3px;
+    height: 100%;
+    background-color: #bbb;
+}
+
+.image-slider-button {
+    pointer-events: none; /* Ignores clicks on the button, so anywhere user clicks on img will move the bar and everything accordingly*/
+    position: absolute;
+    top: 50%;
+    left: var(--slide-position);
+    transform: translate(-50%, -50%);
+    line-height: 0; /* pixel adjust for icon */
+
+    background-color: #bbb;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+    height: 2.5rem;
+    border-radius: 50%;
+
+    border: 2px solid #bbb;
+    color: #fff;
+}
+
+/* ----------------------- STORE - LUT INFO ----------------------- */
+
+.lut-display-info {
+    position: relative;
+    top: -3px; /* To compensate a weird gap between images and info - I couldn't debbug */
+
+    background-color: #ccc;
+    color: #777;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1rem 2rem 5rem 2rem; /* The 5rem is to compensate the button at the end*/
+}
+.lut-display-content {
+}
+.lut-display-title-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lut-display-title {
+    color: #333;
+
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+.lut-display-price {
+}
+.lut-display-description {
+    line-height: 1.5rem;
+    text-align: justify;
+}
+.lut-display-instructions {
+    color: #555;
+    list-style: none;
+    padding: 0;
+
+    line-height: 1.5rem;
+}
+.lut-display-instructions li:first-child {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.lut-buy-btn {
+    position: absolute;
+    bottom: -3px; /* To compensate a weird gap between images and info - I couldn't debbug */
+    left: 0;
+    width: var(--store-card-width); /* this value MUST match the .store-card width */
+
+    background-color: #777;
+    padding: 1.5rem 1rem;
+
+    color: #ddd;
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 400ms ease-in-out;
+    transition-property: background-color font-size font-weight letter-spacing;
+}
+.lut-buy-btn:hover {
+    background-color: #333;
+    font-size: 1.7rem;
+    font-weight: 500;
+    letter-spacing: 5px;
+}
+.lut-buy-btn:active {
+    background-color: #222;
+    letter-spacing: 4px;
+    color: #fff;
+    transition: 100ms ease-in-out;
+}
+/* ---------------------------------------------------------------- */
+/* ---------------------------- ABOUT ----------------------------- */
+/* ---------------------------------------------------------------- */
+#about {
+    background-color: #ccc;
+    color: #000;
+}
+.about-wrapper {
+    display: flex;
+    gap: 3rem;
+    width: 100%;
+}
+.about-img {
+    object-fit: cover;
+    flex: 1 0 1;
+
+    border-radius: 1rem;
+    box-shadow: inset 0 0 30px red;
+}
+.about-content {
+    flex: 1 0 1;
+}
+.about-title {
+    font-size: max(5rem, 6vw);
+    text-transform: capitalize;
+    line-height: max(5rem, 6vw);
+    margin-bottom: 2rem;
+    color: #222;
+    text-align: start;
+}
+
+.about-subtitle {
+    font-size: 3vw;
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: start;
+}
+.about-paragraph {
+    font-size: max(1.2rem, 1.2vw);
+    text-align: justify;
+    color: #444;
+    line-height: max(2rem, 2vw);
+}
+
+/* ---------------------------------------------------------------- */
+/* --------------------------- CONTACT ---------------------------- */
+/* ---------------------------------------------------------------- */
+#contact {
+}
+.contact-wrapper {
+    display: flex;
+    gap: 2rem;
+}
+.contact-form {
+    flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    background-color: #ddd;
+}
+.contact-form input {
+    height: 2rem;
+}
+.contact-form button {
+    height: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #888;
+    color: #fff;
+    cursor: pointer;
+
+    transition: 200ms ease-in-out;
+    transition-property: font-size, letter-spacing, background-color;
+}
+
+.contact-form button:hover {
+    font-size: 1.2rem;
+    letter-spacing: 10px;
+    background-color: #333;
+}
+.contact-form button:active {
+    letter-spacing: 2px;
+    transition: 100ms ease-in;
+}
+
+.contact-phone-and-socials {
+    flex: 0 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background-color: #777;
+    padding: 2rem;
+    border-radius: 10px;
+}
+#contact h3 {
+    font-size: 2rem;
+    font-weight: 100;
+    margin-bottom: 2rem;
+    color: #bbb;
+    text-align: center;
+}
+
+.contact-phone-and-socials button {
+    padding: 2rem;
+    background-color: #ddd;
+    border-radius: 50%;
+    font-size: 3rem;
+    color: #555;
+    line-height: 0;
+    cursor: pointer;
+
+    transition: 300ms ease-in-out;
+    transition-property: background-color, color, font-size, padding;
+}
+
+.contact-phone-and-socials button:hover {
+    background-color: #333;
+    color: #ddd;
+    font-size: 3.6rem;
+    padding: 1.7rem;
+}
+
+/* ---------------------------------------------------------------- */
+/* ---------------------------- FOOTER ---------------------------- */
+/* ---------------------------------------------------------------- */
