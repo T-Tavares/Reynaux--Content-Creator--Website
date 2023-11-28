@@ -1,5 +1,6 @@
 import {workDB, storeDB, cartDB, _validadePromoCode} from '../database.js';
 import {_addToCartDB, _removeFromCartDB, _getCartTotalDB} from '../database.js';
+import {obsverserOptMAP} from './option-maps.js';
 /* 
     Helper and Action functions on this project aim to keep the code cleaner and less repetitive.
 */
@@ -17,7 +18,8 @@ export function renderWorkCards(targetElement) {
     for (const work of workDB) {
         const cardHTML = `
         <div class="work-card" data-video-i-d="${work.videoID}">
-            <img src="assets/work-db-images/${work.videoID}.jpg" alt="" />
+            <div class="blur-container lazy-blur"></div>
+            <img src="assets/work-db-images/lazy-load-mirror/${work.videoID}.jpg" alt="" />
             <div class="work-card-controls">
                 <button><i class="bi bi-play"></i></button>
                 <div>
@@ -30,6 +32,32 @@ export function renderWorkCards(targetElement) {
 
         targetElement.insertAdjacentHTML('beforeend', cardHTML);
     }
+
+    // -------------------- THE LAZY LOAD OBSERVER -------------------- //
+
+    /* 
+        Queue Stack and Context side effect.
+
+        The lazyLoad observer had to be put here because of the order the cards are rendered.
+        When the script file is loaded and read, the work cards do not exist yet.
+    */
+
+    const workCards = [...document.querySelectorAll('.work-card')];
+
+    const lazyLoadObserver = new IntersectionObserver(mainEvent => {
+        if (mainEvent[0].intersectionRatio <= 0) return; // Safe Guard cuz observer was fiering on page load.
+        const cardsIntersectingArr = mainEvent.map(card => card.target); // gets list of cards that intersect
+
+        cardsIntersectingArr.forEach(card => {
+            // TODO - explore playing with discreet animations.
+
+            const videoID = card.dataset.videoID;
+            card.querySelector('img').src = `assets/work-db-images/${videoID}.jpg`;
+            card.firstElementChild.classList.remove('lazy-blur');
+        });
+    }, obsverserOptMAP.NINETY);
+
+    workCards.forEach(card => lazyLoadObserver.observe(card));
 }
 
 // ---------------------------------------------------------------- //

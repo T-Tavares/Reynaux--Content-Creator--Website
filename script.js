@@ -191,6 +191,17 @@ workGalleryEl.addEventListener('click', e => {
 
 videoLightboxEl.addEventListener('click', () => videoLightboxEl.classList.add('hidden'));
 
+// ---------- THE LAZY LOAD OBSERVER ---------- //
+
+/* 
+    Queue Stack and Context side effect.
+
+    The lazyLoad observer had to be put on the helpers-and-actions.js because of the order 
+    the cards are rendered.
+    
+    When the script file is loaded and read, the work cards do not exist yet.
+*/
+
 // ---------------------------------------------------------------- //
 // ------------------------ STORE GALLERY ------------------------- //
 // ---------------------------------------------------------------- //

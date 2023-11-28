@@ -525,6 +525,7 @@ body {
     overflow: hidden;
     cursor: pointer;
 }
+
 .work-card::before {
     content: '';
     position: absolute;
@@ -540,6 +541,20 @@ body {
     height: 100%;
     transition: height 400ms ease-out;
 }
+.blur-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    transition: backdrop-filter 400ms ease-in-out;
+}
+.blur-container.lazy-blur {
+    backdrop-filter: blur(10px);
+    filter: saturate(40%);
+}
+
 .work-card-controls {
     position: absolute;
     top: 0;
