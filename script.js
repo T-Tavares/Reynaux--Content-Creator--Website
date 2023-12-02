@@ -62,6 +62,7 @@ import {
     removeFromCart,
     renderCartTotal,
     renderCartTotalDiscount,
+    updateCartIcon,
 } from './helpers/helpers-and-actions.js';
 import {obsverserOptMAP} from './helpers/option-maps.js';
 
@@ -79,6 +80,7 @@ const shoppingCartSectionEl = document.getElementById('shopping-cart');
 
 // MAIN ELEMENTS
 const navMenuEl = document.querySelector('.nav-menu');
+const navMenuLinksEl = document.querySelectorAll('.nav-menu ul li');
 const workGalleryEl = document.querySelector('.work-gallery');
 const storeGalleryEl = document.querySelector('.store-gallery');
 const videoLightboxEl = document.getElementById('video-lightbox');
@@ -104,6 +106,7 @@ function initRender() {
     renderWorkCards(workGalleryEl);
     renderCartItems(shoppingCartItemsEl);
     renderCartTotal(shoppingCartTotalPrice);
+    updateCartIcon();
 }
 
 initRender();
@@ -121,10 +124,10 @@ initRender();
 const observerNavAnimation = new IntersectionObserver(function (e) {
     const isIntersecting = e[0].isIntersecting;
 
-    /* 
+    /*
         Depending on which navMenuEl classes are active the slideIn class will
         animate slithly different.
-        I am just adding and removing it with a timeout function that follows 
+        I am just adding and removing it with a timeout function that follows
         the same value as the animation on the css file.
     */
 
@@ -145,30 +148,39 @@ observerNavAnimation.observe(homeSectionEl);
 
 // --------- NAV MENU ACTIVE SECTION ---------- //
 
-const observerNavActive = new IntersectionObserver(e => {
+const observerNavActive = new IntersectionObserver(entries => {
     /* 
-        This observer watch the sections, but depending on the section it's 
-        intersectioning. It'll change the nav menu.
+        To mitigate the initialization of the Observer, which fires the call back for all the sections
+        I have built a map to get only the active section based on the isIntersection attribute
+        and created a safe guard to return in case this mapped array is a falsy value.
     */
 
-    const currSectionID = e[0].target.id;
+    const [activeSection] = entries
+        /* 
+            The [] is a destrucuring of the array so I can get the section ID straight away.
+            It also converts for a empty array (falsy value) if the array is empty.
+        */
+        .filter(entry => entry.isIntersecting)
+        .map(entry => entry.target.id);
 
-    // For Loop apply active class to the nav button respective of visible section
-    navLinksArr.forEach(sec => {
-        // remove active class from all buttons
-        sec.classList.remove('active-section');
-        // add active class to current section link ref
-        sec.dataset.ref === currSectionID && sec.classList.add('active-section');
+    if (!activeSection) return; // Safe Guard for when the observer returns an falsy value
+
+    // NAV ELEMENT MANIPULATION ACCORDING TO ACTIVE SECTION
+    navMenuLinksEl.forEach(link => {
+        link.classList.remove('active-section'); // CLEAR LINK
+        if (activeSection === link.dataset.ref) link.classList.add('active-section'); // CROSS LINK IF SECTION IS ACTIVE
     });
-}, obsverserOptMAP.SEVENTY);
+}, obsverserOptMAP.TWENTY);
 
-sectionsArr.forEach(sec => observerNavActive.observe(sec)); // For loop to apply observer to all sections programatically
+sectionsArr.forEach(section => observerNavActive.observe(section));
 
 // NAV SOCIALS HIDE AT CONTACT SECTION
 
 const observerNavSocials = new IntersectionObserver(e => {
-    const hasHiddenClass = navSocialsEl.classList.value.includes('hidden');
-    hasHiddenClass ? navSocialsEl.classList.remove('hidden') : navSocialsEl.classList.add('hidden');
+    // prettier-ignore
+    e[0].isIntersecting ? 
+        navSocialsEl.classList.add('hidden') : 
+        navSocialsEl.classList.remove('hidden');
 }, obsverserOptMAP.TWENTY);
 
 observerNavSocials.observe(contactSectionEl);

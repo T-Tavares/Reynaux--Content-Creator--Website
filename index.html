@@ -18,10 +18,13 @@
         <script src="script.js" type="module" defer></script>
     </head>
     <body>
-        <img class="logo" src="assets/logo.webp" alt="" />
+        <a href="#home"><img class="logo" src="assets/logo.webp" alt="" /></a>
 
         <section id="shopping-cart">
-            <i class="bi bi-cart shopping-cart-icon"> </i>
+            <div class="shopping-cart-icon">
+                <i class="bi bi-cart"> </i>
+                <p class="shopping-cart-icon-counter">1</p>
+            </div>
 
             <div class="shopping-cart-wrapper closed">
                 <div class="shopping-cart-close-btn">
@@ -58,13 +61,19 @@
         <div class="nav-socials">
             <ul>
                 <li>
-                    <button><i class="bi bi-instagram"></i></button>
+                    <a href="https://www.instagram.com/cesareynaux/" target="_blank"
+                        ><button><i class="bi bi-instagram"></i></button
+                    ></a>
                 </li>
+                <!-- <li>
+                    <a href=""
+                        ><button><i class="bi bi-facebook"></i></button
+                    ></a>
+                </li> -->
                 <li>
-                    <button><i class="bi bi-facebook"></i></button>
-                </li>
-                <li>
-                    <button><i class="bi bi-whatsapp"></i></button>
+                    <a href="https://wa.me/5511934919367" target="_blank"
+                        ><button><i class="bi bi-whatsapp"></i></button
+                    ></a>
                 </li>
             </ul>
         </div>

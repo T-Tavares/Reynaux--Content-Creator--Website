@@ -44,18 +44,18 @@ export function renderWorkCards(targetElement) {
 
     const workCards = [...document.querySelectorAll('.work-card')];
 
-    const lazyLoadObserver = new IntersectionObserver(mainEvent => {
-        if (mainEvent[0].intersectionRatio <= 0) return; // Safe Guard cuz observer was fiering on page load.
-        const cardsIntersectingArr = mainEvent.map(card => card.target); // gets list of cards that intersect
+    const lazyLoadObserver = new IntersectionObserver((entries, observer) => {
+        if (entries[0].intersectionRatio <= 0) return; // Safe Guard Clause => prevent bug of the observer call back fiering on page load
+        const cardsIntersectingArr = entries.map(card => card.target); // gets list of cards that intersect
 
         cardsIntersectingArr.forEach(card => {
-            // TODO - explore playing with discreet animations.
-
             const videoID = card.dataset.videoID;
             card.querySelector('img').src = `assets/work-db-images/${videoID}.jpg`;
             card.firstElementChild.classList.remove('lazy-blur');
+
+            observer.unobserve(card); // Unobserve the fully loaded cards.
         });
-    }, obsverserOptMAP.NINETY);
+    }, obsverserOptMAP.HALF);
 
     workCards.forEach(card => lazyLoadObserver.observe(card));
 }
@@ -191,6 +191,15 @@ export function renderStoreCards(targetElement) {
     it make sense that the elements acessed on the function would not have much use out of it.
 
 */
+export function updateCartIcon() {
+    const cartIconCounter = document.querySelector('.shopping-cart-icon-counter');
+    const cartItemsCount = cartDB.length;
+    cartIconCounter.textContent = cartItemsCount;
+
+    cartItemsCount <= 0
+        ? (cartIconCounter.style.visibility = 'hidden')
+        : (cartIconCounter.style.visibility = 'visible');
+}
 
 export function addToCart(event, targetElement) {
     // Guard Clause to return If click is not on addToCartBtn
@@ -218,6 +227,7 @@ export function addToCart(event, targetElement) {
 
     // RERENDER CART
     renderCartItems(targetElement);
+    updateCartIcon();
 }
 
 export function removeFromCart(event, targetElement) {
@@ -230,6 +240,7 @@ export function removeFromCart(event, targetElement) {
     // REMOVE FROM DB AND RERENDER
     _removeFromCartDB(itemRef);
     renderCartItems(targetElement);
+    updateCartIcon();
 }
 
 export function renderCartTotal(targetElement) {

@@ -109,6 +109,21 @@ body {
     top: 1.4rem;
 }
 
+.shopping-cart-icon-counter {
+    position: absolute;
+    right: -5px;
+    top: 0;
+    color: #000;
+    background-color: #fff;
+    font-size: 1rem;
+    padding: 5px;
+    aspect-ratio: 1/1;
+    line-height: 10px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    /* visibility: hidden; */
+}
+
 .shopping-cart-wrapper {
     position: fixed;
     display: grid;
@@ -204,7 +219,15 @@ body {
 .shopping-cart-card-cancel-btn {
     font-size: 2rem;
     line-height: 0;
+    border-radius: 50%;
     flex: 0 1;
+    cursor: pointer;
+    transition-property: background, color;
+    transition: 200ms ease-in-out;
+}
+.shopping-cart-card-cancel-btn:hover {
+    background: radial-gradient(#000 65%, #fff 70%);
+    color: #fff;
 }
 /* ---- SHOPPING CART PROMO CODE ---- */
 
@@ -407,25 +430,29 @@ body {
 .nav-socials ul {
     display: flex;
     flex-direction: column;
+    gap: 0.8rem;
 
     list-style: none;
 }
 
-.nav-socials ul li {
+.nav-socials ul li a {
     color: var(--text-colour);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     min-height: 2.5rem;
     min-width: 2.5rem;
     cursor: pointer;
     transition: var(--transition-fast-setup);
 }
 
-.nav-socials ul li:hover {
+.nav-socials ul li a:hover {
     color: var(--text-colour-lowlight);
 }
-.nav-socials ul li:active {
+.nav-socials ul li a:active {
     color: var(--text-colour-highlight);
     font-size: 1.1rem;
+}
+.nav-socials.hidden {
+    visibility: hidden;
 }
 
 /* ---------------------------------------------------------------- */
