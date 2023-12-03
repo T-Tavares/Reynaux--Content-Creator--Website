@@ -6,9 +6,8 @@
 
     --transition-fast-setup: 200ms ease-in-out;
     --transition-long-setup: 400ms ease-in-out;
-
-    --nav-animation-time: 250ms; /* Also helpful in case I want to change it on JS*/
 }
+
 html {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -34,6 +33,9 @@ button {
     all: unset;
 }
 
+.hide {
+    visibility: hidden;
+}
 /* ------------------------- INIT SET UP -------------------------- */
 
 body {
@@ -68,6 +70,7 @@ body {
 
     text-align: center;
 }
+
 /* ---------------------------- LOGO ----------------------------- */
 
 .logo {
@@ -80,6 +83,8 @@ body {
 /* ---------------------------------------------------------------- */
 /* ------------------------ SHOPPING CART ------------------------- */
 /* ---------------------------------------------------------------- */
+
+/* FIXME - SHOPPING CART SIZE OVERSIZED FOR MOBILE. */
 
 .shopping-cart-icon {
     position: fixed;
@@ -108,6 +113,7 @@ body {
     right: 1.4rem;
     top: 1.4rem;
 }
+/* FIXME - CART COUNTER DISTORTED ON MOBILE - FIGURE IT AND FIX IT  */
 
 .shopping-cart-icon-counter {
     position: absolute;
@@ -298,6 +304,7 @@ body {
 /* ---------------------------------------------------------------- */
 
 .nav-menu {
+    --nav-animation-time: 250ms; /* Also helpful in case I want to change it on JS*/
     position: relative;
     display: flex;
     align-items: center;
@@ -463,7 +470,7 @@ body {
 /* ------------------------ LIGHTBOX VIDEO ------------------------ */
 /* ---------------------------------------------------------------- */
 
-/* TODO - FIND A WAY TO MAKE A FADE TRANSITION - MOSTLY TO HIDE IFRAME GLITCH WHEN CHANGE VIDEO SRC  */
+/* FIXME - FIND A WAY TO MAKE A FADE TRANSITION - MOSTLY TO HIDE IFRAME GLITCH WHEN CHANGE VIDEO SRC  */
 #video-lightbox {
     display: flex;
     align-items: center;
@@ -498,6 +505,8 @@ body {
 /* ---------------------------------------------------------------- */
 /* ----------------------------- HOME ----------------------------- */
 /* ---------------------------------------------------------------- */
+
+/* FIXME - VIDEO NOT PLAYING ON MOBILE. AND SMOOTH EDGE OUT OT PLACE. */
 
 #home {
     color: var(--text-colour);
@@ -936,6 +945,7 @@ body {
 /* ---------------------------------------------------------------- */
 /* ---------------------------- ABOUT ----------------------------- */
 /* ---------------------------------------------------------------- */
+
 #about {
     background-color: #ccc;
     color: #000;
@@ -1070,3 +1080,105 @@ body {
 /* ---------------------------------------------------------------- */
 /* ---------------------------- FOOTER ---------------------------- */
 /* ---------------------------------------------------------------- */
+footer {
+    height: 4rem;
+    width: 100%;
+    background-color: #111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+footer p {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: #444;
+}
+footer p a {
+    text-decoration: none;
+    color: #777;
+    transition: color 300ms ease-in-out;
+}
+footer p a:hover {
+    color: #999;
+}
+/* ---------------------------------------------------------------- */
+/* ---------------------- MEDIA QUERY MOBILE ---------------------- */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 415px) {
+    /* GENERAL */
+    #home {
+        width: 100vw;
+    }
+    #work,
+    #store,
+    #about,
+    #contact {
+        margin: 0;
+        padding: 1rem;
+    }
+    #work .title,
+    #store .title,
+    #about .title,
+    #contact .title {
+        width: auto;
+    }
+    /* NAV MENU */
+    .nav-menu {
+        background-color: #ddd;
+        color: #000;
+        border-radius: 0 0 1rem 1rem;
+        box-shadow: 0 0 10px #000;
+
+        mix-blend-mode: normal;
+        width: fit-content;
+        padding: 0 1rem;
+        left: 0.5rem;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .nav-menu ul li a {
+        color: #000;
+    }
+
+    /* WORK SECTION */
+
+    /* STORE SECTION */
+    .store-card {
+        width: 100%;
+        --store-card-width: 100vw;
+    }
+    .lut-buy-btn {
+        width: 100%;
+        padding: 1rem 0;
+        margin: 0;
+    }
+
+    /* ABOUT SECTION */
+    .about-wrapper {
+        flex-direction: column;
+    }
+
+    /* CONTACT SECTION */
+    .contact-wrapper {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #contact .title {
+        margin-bottom: 1rem;
+        width: auto;
+    }
+    .contact-phone-and-socials {
+        flex-direction: row;
+        padding: 1rem 2rem;
+    }
+    .contact-phone-and-socials button {
+        font-size: 2rem;
+        padding: 1rem;
+    }
+}

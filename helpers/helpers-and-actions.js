@@ -5,6 +5,8 @@ import {obsverserOptMAP} from './option-maps.js';
     Helper and Action functions on this project aim to keep the code cleaner and less repetitive.
 */
 
+export const isMobile = () => window.innerWidth <= 420;
+
 // ---------------------------------------------------------------- //
 // --------------------- WORK SECTION HELPERS --------------------- //
 // ---------------------------------------------------------------- //
@@ -13,6 +15,8 @@ import {obsverserOptMAP} from './option-maps.js';
 
 // Returns String for video to be embeded on iframe.
 export const getIframeLink = id => `https://www.youtube.com/embed/${id}?enablejsapi=1&controls=0`;
+
+// FIXME FIX LUT DESCRIPTION SLICE TO FIT MOBILE SCREENS
 
 export function renderWorkCards(targetElement) {
     for (const work of workDB) {

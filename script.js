@@ -51,6 +51,8 @@
 // --------------------------- IMPORTS ---------------------------- //
 
 import {
+    isMobile,
+    //
     renderWorkCards,
     getIframeLink,
     //
@@ -80,7 +82,6 @@ const shoppingCartSectionEl = document.getElementById('shopping-cart');
 
 // MAIN ELEMENTS
 const navMenuEl = document.querySelector('.nav-menu');
-const navMenuLinksEl = document.querySelectorAll('.nav-menu ul li');
 const workGalleryEl = document.querySelector('.work-gallery');
 const storeGalleryEl = document.querySelector('.store-gallery');
 const videoLightboxEl = document.getElementById('video-lightbox');
@@ -92,6 +93,10 @@ const shoppingCartWrapperEl = document.querySelector('.shopping-cart-wrapper');
 const shoppingCartItemsEl = document.querySelector('.shopping-cart-content');
 const shoppingCartTotalPrice = document.querySelector('.shopping-cart-total-price');
 const shoppingCartPromoCodeEl = document.querySelector('.shopping-cart-promo-code');
+
+// NAV ELEMENTS
+const navMenuLinksEl = document.querySelectorAll('.nav-menu ul li');
+const logoEl = document.querySelector('.logo'); // Mobile Nav Opener
 
 // HELPERS
 const sectionsArr = [homeSectionEl, workSectionEl, storeSectionEl, aboutSectionEl, contactSectionEl];
@@ -107,6 +112,7 @@ function initRender() {
     renderCartItems(shoppingCartItemsEl);
     renderCartTotal(shoppingCartTotalPrice);
     updateCartIcon();
+    if (+window.innerWidth < 420) navMenuEl.classList.add('hide'); // hide nav menu on mobile load
 }
 
 initRender();
@@ -119,10 +125,27 @@ initRender();
 // --------------------------- NAV MENU --------------------------- //
 // ---------------------------------------------------------------- //
 
+// MOBILE NAV MENU
+navMenuEl.addEventListener('click', e => {
+    if (!isMobile()) return; // GUARD CLAUSE TO NOT HIDE MENU ON DESKTOP
+    navMenuEl.classList.add('hide');
+});
+
+logoEl.addEventListener('click', e => navMenuEl.classList.remove('hide'));
+
 // ------- NAV MENU ANIMATION TRIGGER -------- //
 
 const observerNavAnimation = new IntersectionObserver(function (e) {
+    if (isMobile()) return; //  Guard Clause to return if screen width  is smaller than 420
     const isIntersecting = e[0].isIntersecting;
+
+    /* 
+        Changing the animation time value on the CSS file will also change it here. 
+        I kept it that way so all the changes of style will work independently from the JS. 
+        And the JS will just update itselfe to it.
+    */
+
+    const animationTime = parseFloat(getComputedStyle(navMenuEl).getPropertyValue('--nav-animation-time'));
 
     /*
         Depending on which navMenuEl classes are active the slideIn class will
@@ -131,15 +154,13 @@ const observerNavAnimation = new IntersectionObserver(function (e) {
         the same value as the animation on the css file.
     */
 
-    // TODO - find a way to programatically have the trigger time connected here and on the CSS
-
     if (isIntersecting) {
         navMenuEl.classList.add('slideIn');
-        setTimeout(() => navMenuEl.classList.remove('slideIn'), 300);
+        setTimeout(() => navMenuEl.classList.remove('slideIn'), animationTime);
         navMenuEl.classList.remove('nav-menu-corner');
     } else {
         navMenuEl.classList.add('slideIn');
-        setTimeout(() => navMenuEl.classList.remove('slideIn'), 300);
+        setTimeout(() => navMenuEl.classList.remove('slideIn'), animationTime);
         navMenuEl.classList.add('nav-menu-corner');
     }
 }, obsverserOptMAP.SEVENTY_FIVE);
@@ -149,6 +170,8 @@ observerNavAnimation.observe(homeSectionEl);
 // --------- NAV MENU ACTIVE SECTION ---------- //
 
 const observerNavActive = new IntersectionObserver(entries => {
+    if (isMobile()) return; //  Guard Clause to return if screen width  is smaller than 420
+
     /* 
         To mitigate the initialization of the Observer, which fires the call back for all the sections
         I have built a map to get only the active section based on the isIntersection attribute
